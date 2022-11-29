@@ -1,0 +1,22 @@
+{
+  "name": "@adb/adb-loan-origination-component",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "types": "index.d.ts",
+  "description": "Manage Loan Component Flow for aeon app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Hitesh101D",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.190",
+    "@types/react": "^17.0.20",
+    "@types/react-native": "^0.70.7",
+    "typescript": "^4.4.2"
+  }
+}
