@@ -1,0 +1,1 @@
+# adb-loan-origination-component
