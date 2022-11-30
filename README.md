@@ -23,6 +23,8 @@ Make sure you have permission to access this repository
 Because **adb-loan-origination-component** depends on some libraries, so make sure you installed all dependencies into your project.
 
 - [react-native-svg](https://github.com/react-native-community/react-native-svg)
+- [rn-range-slider](https://github.com/githuboftigran/rn-range-slider)
+- [async-storage](https://react-native-async-storage.github.io/async-storage/docs/usage/)
 
 ## Quick Start
 
@@ -95,6 +97,18 @@ As the name suggest this screen provide UI for reviewing user details.
 ```javascript
 export interface IReviewDetails {
   onPressContinue: () => void;
+}
+```
+
+### `SelectAmountComponent`
+
+Select Amount Component provide UI for selecing credit for loan.
+
+- Props
+
+```javascript
+export interface ISelectAmountComp {
+  onPressContinue: (amount: number, duration: number) => void;
 }
 ```
 
