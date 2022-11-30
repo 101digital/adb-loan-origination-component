@@ -42,18 +42,19 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#1b1b1b',
+    color: colors.secondary,
     marginBottom: 8,
     marginRight: 30,
   },
   subTitle: {
     fontSize: 14,
-    color: '#1b1b1b',
+    color: colors.secondary,
     marginBottom: 20,
     width: '80%',
   },
   lowerContainer: {
     paddingHorizontal: 24,
+    marginBottom: 8,
   },
   imageView: {
     width: '100%',

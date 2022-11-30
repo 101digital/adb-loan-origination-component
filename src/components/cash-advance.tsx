@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import React from 'react';
 import ImagePicker from '../components/common/image-picker';
 import ImageIcon from '../components/icons/ImageIcon';
@@ -15,16 +15,18 @@ const CashAdvanceComponent: React.FC<ICashAdvance> = (props: ICashAdvance) => {
   const { onApplyNowPress } = props;
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Cash Advance-i</Text>
-        <Text style={styles.subTitle}>Your amazing banking experience.</Text>
-        <View style={styles.imageContainer}>
-          <ImagePicker />
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.title}>Cash Advance-i</Text>
+          <Text style={styles.subTitle}>Your amazing banking experience.</Text>
+          <View style={styles.imageContainer}>
+            <ImagePicker />
+          </View>
+          <TextWithIcon title="Benefits" />
+          <TextWithIcon title="T&Cs" />
+          <TextWithIcon title="Product Disclosure Sheets" />
         </View>
-        <TextWithIcon title="Benefits" />
-        <TextWithIcon title="T&Cs" />
-        <TextWithIcon title="Product Disclosure Sheets" />
-      </View>
+      </ScrollView>
       <View style={styles.lowerContainer}>
         <AlertMessage text="By continuing, I agree and comply with ADB's privacy policy and terms and conditions." />
         <Button label="Apply Now" onPress={onApplyNowPress} />
@@ -49,17 +51,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#1b1b1b',
+    color: colors.secondary,
     marginBottom: 8,
   },
   subTitle: {
     fontSize: 14,
-    color: '#1b1b1b',
+    color: colors.secondary,
   },
   imageContainer: {
     marginVertical: 32,
   },
   lowerContainer: {
     paddingHorizontal: 24,
+    marginBottom: 8,
   },
 });
