@@ -1,14 +1,16 @@
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '../components/core/button';
 import { fonts } from '../assets/fonts';
 import { colors } from '../assets';
+import { LoanOriginationContext } from '../contexts';
 
 export interface IReviewDetails {
   onPressContinue: () => void;
 }
 const ReviewDetailsComponent: React.FC<IReviewDetails> = (props: IReviewDetails) => {
   const { onPressContinue } = props;
+  const { changeUserStatus } = useContext(LoanOriginationContext);
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
@@ -45,12 +47,18 @@ const ReviewDetailsComponent: React.FC<IReviewDetails> = (props: IReviewDetails)
         <View style={{ marginBottom: 8 }}>
           <Button
             label="My details are outdated"
-            background="#ffffff"
+            background={colors.white}
             labelColor={colors.secondary}
             onPress={() => {}}
           />
         </View>
-        <Button label="Continue" onPress={onPressContinue} />
+        <Button
+          label="Continue"
+          onPress={() => {
+            changeUserStatus();
+            onPressContinue();
+          }}
+        />
       </View>
     </SafeAreaView>
   );

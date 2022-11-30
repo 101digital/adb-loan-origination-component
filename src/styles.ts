@@ -9,7 +9,8 @@ export const styles = StyleSheet.create({
   navContainer: {
     backgroundColor: colors.primary,
     height: withHeightPercent(35),
-    borderRadius: withHeightPercent(4),
+    borderBottomEndRadius: withHeightPercent(4),
+    borderBottomStartRadius: withHeightPercent(4),
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
