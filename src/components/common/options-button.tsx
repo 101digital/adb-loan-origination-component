@@ -33,6 +33,6 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1b1b1b',
+    color: colors.secondary,
   },
 });

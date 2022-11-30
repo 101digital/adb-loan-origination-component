@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import React from 'react';
 import TextWithIcon from '../components/core/text-with-icon';
 import AlertMessage from '../components/common/alert-message';
@@ -12,17 +12,19 @@ const NewCustomerComponent: React.FC<INewCustomer> = (props: INewCustomer) => {
   const { onPressContinue } = props;
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Text style={styles.title}>It seems you are a new financing customer</Text>
-        <Text style={styles.subTitle}>Before we proceed...</Text>
-        <View style={styles.pointsContainer}>
-          <TextWithIcon title="We’ll run credit & background checks to determine your eligibility." />
-          <TextWithIcon title="If approved, we’ll grant you a credit limit that you can use across all financing products." />
-          <TextWithIcon title="If you don’t have a Savings Account with us, open one for you and make payments." />
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.title}>It seems you are a new financing customer</Text>
+          <Text style={styles.subTitle}>Before we proceed...</Text>
+          <View style={styles.pointsContainer}>
+            <TextWithIcon title="We’ll run credit & background checks to determine your eligibility." />
+            <TextWithIcon title="If approved, we’ll grant you a credit limit that you can use across all financing products." />
+            <TextWithIcon title="If you don’t have a Savings Account with us, open one for you and make payments." />
+          </View>
+          <TextWithIcon title="T&Cs" />
+          <TextWithIcon title="PDPA" />
         </View>
-        <TextWithIcon title="T&Cs" />
-        <TextWithIcon title="PDPA" />
-      </View>
+      </ScrollView>
       <View style={styles.lowerContainer}>
         <AlertMessage text="By continuing, I agree and comply with ADB's privacy policy and terms and conditions." />
         <Button label="Continue" onPress={onPressContinue} />
@@ -47,13 +49,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#1b1b1b',
+    color: colors.secondary,
     marginBottom: 8,
     marginRight: 20,
   },
   subTitle: {
     fontSize: 14,
-    color: '#1b1b1b',
+    color: colors.secondary,
   },
   pointsContainer: {
     marginTop: 30,
@@ -65,5 +67,6 @@ const styles = StyleSheet.create({
   },
   lowerContainer: {
     paddingHorizontal: 24,
+    marginBottom: 8,
   },
 });

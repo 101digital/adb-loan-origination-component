@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import React from 'react';
 import Button from '../components/core/button';
 import { fonts } from '../assets/fonts';
@@ -11,38 +11,40 @@ const ReviewDetailsComponent: React.FC<IReviewDetails> = (props: IReviewDetails)
   const { onPressContinue } = props;
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Review your details</Text>
-        <Text style={styles.subTitle}>Please confirm your details are up to date.</Text>
-        <View style={styles.contactInfoContainer}>
-          <Text style={styles.subContainerTitle}>Contact Info</Text>
-          <View style={{ marginBottom: 24 }}>
-            <Text style={styles.type}>Address</Text>
-            <Text style={styles.value}>
-              Olive P5-20 Empire Residence 40170 Damansara Perdana Selangor
-            </Text>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.title}>Review your details</Text>
+          <Text style={styles.subTitle}>Please confirm your details are up to date.</Text>
+          <View style={styles.contactInfoContainer}>
+            <Text style={styles.subContainerTitle}>Contact Info</Text>
+            <View style={{ marginBottom: 24 }}>
+              <Text style={styles.type}>Address</Text>
+              <Text style={styles.value}>
+                Olive P5-20 Empire Residence 40170 Damansara Perdana Selangor
+              </Text>
+            </View>
+          </View>
+          <View style={styles.contactInfoContainer}>
+            <Text style={styles.subContainerTitle}>Employment info</Text>
+            <View style={{ marginBottom: 24 }}>
+              <Text style={styles.type}>Employment type</Text>
+              <Text style={styles.value}>Private</Text>
+            </View>
+            <View style={{ marginBottom: 24 }}>
+              <Text style={styles.type}>Employment sector</Text>
+              <Text style={styles.value}>Hospitality Industry</Text>
+            </View>
+            <View style={{ marginBottom: 24 }}>
+              <Text style={styles.type}>Name of employer</Text>
+              <Text style={styles.value}>Four Season Hotel</Text>
+            </View>
           </View>
         </View>
-        <View style={styles.contactInfoContainer}>
-          <Text style={styles.subContainerTitle}>Employment info</Text>
-          <View style={{ marginBottom: 24 }}>
-            <Text style={styles.type}>Employment type</Text>
-            <Text style={styles.value}>Private</Text>
-          </View>
-          <View style={{ marginBottom: 24 }}>
-            <Text style={styles.type}>Employment sector</Text>
-            <Text style={styles.value}>Hospitality Industry</Text>
-          </View>
-          <View style={{ marginBottom: 24 }}>
-            <Text style={styles.type}>Name of employer</Text>
-            <Text style={styles.value}>Four Season Hotel</Text>
-          </View>
-        </View>
-      </View>
+      </ScrollView>
       <View style={styles.lowerContainer}>
         <View style={{ marginBottom: 8 }}>
           <Button
-            label="Continue"
+            label="My details are outdated"
             background="#ffffff"
             labelColor={colors.secondary}
             onPress={() => {}}
@@ -70,17 +72,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#1b1b1b',
+    color: colors.secondary,
     marginBottom: 8,
     marginRight: 20,
   },
   subTitle: {
     fontSize: 14,
-    color: '#1b1b1b',
+    color: colors.secondary,
     marginBottom: 20,
   },
   lowerContainer: {
     paddingHorizontal: 24,
+    marginBottom: 8,
   },
   contactInfoContainer: {
     marginVertical: 12,
