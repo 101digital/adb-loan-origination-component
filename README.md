@@ -4,13 +4,9 @@
 
 ## Features
 
----
-
 - Provide and manage loan origination flow
 
 ## Installation
-
----
 
 To add this component to React Native app, run this command:
 
@@ -27,8 +23,6 @@ Because **adb-loan-origination-component** depends on some libraries, so make su
 - [async-storage](https://react-native-async-storage.github.io/async-storage/docs/usage/)
 
 ## Quick Start
-
----
 
 ```javascript
 import { LoanComponent } from '@adb/adb-loan-origination-component';
