@@ -12,13 +12,13 @@ export interface ICashAdvance {
   onApplyNowPress: () => void;
 }
 
-const CashAdvanceComponent: React.FC<ICashAdvance> = (props: ICashAdvance) => {
+const PersonalFinancingComponent: React.FC<ICashAdvance> = (props: ICashAdvance) => {
   const { onApplyNowPress } = props;
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.title}>Cash Advance-i</Text>
+          <Text style={styles.title}>Personal Financing-i</Text>
           <Text style={styles.subTitle}>Your amazing banking experience.</Text>
           <View style={styles.imageContainer}>
             <ImageSwiper />
@@ -36,7 +36,7 @@ const CashAdvanceComponent: React.FC<ICashAdvance> = (props: ICashAdvance) => {
   );
 };
 
-export default CashAdvanceComponent;
+export default PersonalFinancingComponent;
 
 const styles = StyleSheet.create({
   safeArea: {

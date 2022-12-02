@@ -2,6 +2,9 @@ import { View, Text, FlatList } from 'react-native';
 import React, { useMemo } from 'react';
 import { styles } from './styles';
 import OptionsButton from './components/common/options-button';
+import { useContext } from 'react';
+import { LoanOriginationContext } from './contexts';
+import { sortnull } from './helpers/sort-null';
 export interface ILoanComponent {
   onCashAdvancePress: () => void;
   onFinancePress: () => void;
@@ -10,19 +13,37 @@ export interface ILoanComponent {
 }
 const LoanComponent: React.FC<ILoanComponent> = (props: ILoanComponent) => {
   const { onRevCreditPress, onGroceryPayPress, onFinancePress, onCashAdvancePress } = props;
+  const {
+    isAdvanceCashApplied,
+    isPersonalLoanApplied,
+    advanceCashLoanData,
+    personalFinanceLoanData,
+  } = useContext(LoanOriginationContext);
   const options = useMemo(
     () => [
-      { id: '1', title: 'Cash Advance-i', onPress: onCashAdvancePress, isDataAvailable: true },
-      { id: '2', title: 'Personal Financing-i', onPress: onFinancePress },
-      { id: '3', title: 'Grocery Pay Less-i', onPress: onGroceryPayPress },
-      { id: '4', title: 'Revolving Credit', onPress: onRevCreditPress },
+      {
+        id: '1',
+        title: 'Cash Advance-i',
+        onPress: onCashAdvancePress,
+        isDataAvailable: isAdvanceCashApplied,
+        data: advanceCashLoanData,
+      },
+      {
+        id: '2',
+        title: 'Personal Financing-i',
+        onPress: onFinancePress,
+        isDataAvailable: isPersonalLoanApplied,
+        data: personalFinanceLoanData,
+      },
+      { id: '3', title: 'Grocery Pay Less-i', onPress: onGroceryPayPress, data: null },
+      { id: '4', title: 'Revolving Credit', onPress: onRevCreditPress, data: null },
     ],
     [onRevCreditPress, onGroceryPayPress, onFinancePress, onCashAdvancePress]
   );
   return (
     <View style={styles.container}>
       <FlatList
-        data={options}
+        data={sortnull(options)}
         keyExtractor={(item) => item.id}
         bounces={false}
         showsVerticalScrollIndicator={false}
@@ -33,6 +54,7 @@ const LoanComponent: React.FC<ILoanComponent> = (props: ILoanComponent) => {
                 title={item.title}
                 onClick={item.onPress}
                 isDataAvailable={item.isDataAvailable}
+                data={item.data}
               />
             </View>
           );

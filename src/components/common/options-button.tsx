@@ -2,28 +2,31 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { colors } from '../../assets';
 import RightArrowIcon from '../../components/icons/RightArrowIcon';
+import { loanDataType } from '../../contexts/types';
+import { fonts } from '../../assets/fonts';
 export interface IOptionsButton {
   title: string;
   onClick: () => void;
   isDataAvailable?: boolean;
+  data: loanDataType | null;
 }
 
 const OptionsButton: React.FC<IOptionsButton> = (props: IOptionsButton) => {
-  const { title, onClick, isDataAvailable } = props;
+  const { title, onClick, isDataAvailable, data } = props;
   return (
     <TouchableOpacity style={styles.container} onPress={onClick}>
       <View style={styles.subContainer}>
         <Text style={styles.title}>{title}</Text>
         <RightArrowIcon />
       </View>
-      {isDataAvailable && (
+      {isDataAvailable && data && (
         <>
           <View style={styles.progressContainer}>
             <View style={styles.progress} />
           </View>
           <View style={styles.subContainer}>
-            <Text>0/1 month</Text>
-            <Text>RM 600.00</Text>
+            <Text>0/{data.duration} month</Text>
+            <Text>RM {data.amount.toFixed(2)}</Text>
           </View>
         </>
       )}
@@ -52,7 +55,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: fonts.semiBold,
     color: colors.secondary,
   },
   progressContainer: {

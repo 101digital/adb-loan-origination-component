@@ -1,11 +1,12 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useState } from 'react';
-import { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native';
 // @ts-ignore
 import Slider from 'rn-range-slider';
 import Thumb from './thumb';
 import Rail from './rail';
 import RailSelected from './rail-selected';
 import ThumbLabel from './thumb-label';
+import { fonts } from '../../../assets/fonts';
 
 export type RangeSliderProps = {
   min: number;
@@ -21,6 +22,9 @@ export type RangeSliderProps = {
   onTouch?: (moving: boolean) => void;
   labelFormat?: string;
   labelStyle?: StyleProp<TextStyle>;
+  title?: string;
+  minLabel?: string;
+  maxLabel?: string;
 };
 
 const RangeSlider = forwardRef((props: RangeSliderProps, ref) => {
@@ -38,6 +42,9 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref) => {
     floatingLabel,
     labelStyle,
     labelFormat,
+    title,
+    minLabel,
+    maxLabel,
   } = props;
 
   const [low, setLow] = useState(initLow);
@@ -72,23 +79,30 @@ const RangeSlider = forwardRef((props: RangeSliderProps, ref) => {
   );
 
   return (
-    <Slider
-      style={style}
-      min={min}
-      max={max}
-      low={low}
-      high={high}
-      step={step}
-      renderThumb={floatingLabel ? renderThumbLabel : renderThumb}
-      renderRail={renderRail}
-      renderRailSelected={renderRailSelected}
-      disableRange={disableRange}
-      disabled={disable}
-      floatingLabel={false}
-      onValueChanged={handleValueChange}
-      onTouchStart={() => onTouch && onTouch(true)}
-      onTouchEnd={() => onTouch && onTouch(false)}
-    />
+    <>
+      <Text style={styles.selectAmountText}>{title}</Text>
+      <Slider
+        style={style}
+        min={min}
+        max={max}
+        low={low}
+        high={high}
+        step={step}
+        renderThumb={floatingLabel ? renderThumbLabel : renderThumb}
+        renderRail={renderRail}
+        renderRailSelected={renderRailSelected}
+        disableRange={disableRange}
+        disabled={disable}
+        floatingLabel={false}
+        onValueChanged={handleValueChange}
+        onTouchStart={() => onTouch && onTouch(true)}
+        onTouchEnd={() => onTouch && onTouch(false)}
+      />
+      <View style={styles.rangeTextContainer}>
+        <Text style={styles.amountApplyText}>{minLabel}</Text>
+        <Text style={styles.amountApplyText}>{maxLabel}</Text>
+      </View>
+    </>
   );
 });
 
@@ -99,3 +113,24 @@ RangeSlider.defaultProps = {
 };
 
 export default RangeSlider;
+
+const styles = StyleSheet.create({
+  selectAmountText: {
+    fontSize: 12,
+    fontFamily: fonts.regular,
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  rangeTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 20,
+  },
+  amountApplyText: {
+    fontFamily: fonts.regular,
+    fontSize: 14,
+    lineHeight: 20,
+  },
+});
