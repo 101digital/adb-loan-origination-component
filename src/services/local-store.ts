@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const IS_NEW_CUSTOMER = 'loancomponent.isNewCustomer';
 
 class LoanComponentStore {
-  storeCustomerStatus = (isNewCustomer: string) =>
+  storeCustomerStatus = (isNewCustomer: 'true' | 'false') =>
     AsyncStorage.setItem(IS_NEW_CUSTOMER, isNewCustomer);
 
   getCustomerStatus = () => AsyncStorage.getItem(IS_NEW_CUSTOMER);

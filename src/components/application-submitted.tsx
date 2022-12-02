@@ -1,25 +1,34 @@
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import React from 'react';
-import { fonts } from '../assets/fonts';
 import Button from '../components/core/button';
 import { colors } from '../assets';
 import { withHeightPercent } from '../helpers/screen-utils';
 import RawImageIcon from './icons/RawImageIcon';
 
-const ApplicationSubmittedComponent = () => {
+export interface IApplicationSubmitted {
+  onPressContinue: () => void;
+  loanPaidType?: string;
+}
+
+const ApplicationSubmittedComponent: React.FC<IApplicationSubmitted> = (props) => {
+  const { onPressContinue, loanPaidType } = props;
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.imageView}>
           <RawImageIcon />
         </View>
-        <Text style={styles.title}>Application has been submitted</Text>
+        <Text style={styles.title}>
+          {loanPaidType ? 'Succesfully paid!' : 'Application has been submitted'}
+        </Text>
         <Text style={styles.subTitle}>
-          Thank you and we’ll notify you once your credit limit is ready.
+          {loanPaidType
+            ? `Graet! Your ${loanPaidType} has been paid in full.`
+            : 'Thank you and we’ll notify you once your credit limit is ready.'}
         </Text>
       </View>
       <View style={styles.lowerContainer}>
-        <Button label="Go to Home" onPress={() => {}} />
+        <Button label={loanPaidType ? 'Go to Finance' : 'Go to Home'} onPress={onPressContinue} />
       </View>
     </SafeAreaView>
   );

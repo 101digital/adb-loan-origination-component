@@ -1,18 +1,23 @@
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, FlatList } from 'react-native';
 import React from 'react';
 import { colors } from '../assets';
 import Button from '../components/core/button';
 import { fonts } from '../assets/fonts';
 
+export interface requestDataTypes {
+  id: string;
+  title: string;
+  value: string;
+}
+
 export interface IConfirmRequest {
-  amount: number;
-  duration: number;
   onPressEdit: () => void;
   onSubmitApplication: () => void;
+  requestData: Array<requestDataTypes>;
 }
-const FEES = 15;
+
 const ConfirmRequestComponent: React.FC<IConfirmRequest> = (props: IConfirmRequest) => {
-  const { amount = 0, duration = 0, onPressEdit, onSubmitApplication } = props;
+  const { onPressEdit, onSubmitApplication, requestData = [] } = props;
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -23,20 +28,17 @@ const ConfirmRequestComponent: React.FC<IConfirmRequest> = (props: IConfirmReque
             Edit
           </Text>
         </View>
-        <View style={styles.row}>
-          <View style={{ marginBottom: 24 }}>
-            <Text style={styles.type}>Financing amount</Text>
-            <Text style={styles.value}>RM {amount.toFixed(2)}</Text>
-          </View>
-          <View style={{ marginBottom: 24, marginLeft: 24 }}>
-            <Text style={styles.type}>Tenure duration</Text>
-            <Text style={styles.value}>{duration.toFixed(2)} month</Text>
-          </View>
-        </View>
-        <View style={{ marginBottom: 24 }}>
-          <Text style={styles.type}>Fees</Text>
-          <Text style={styles.value}>RM {FEES.toFixed(2)}</Text>
-        </View>
+        <FlatList
+          data={requestData}
+          keyExtractor={(item) => item.id}
+          numColumns={2}
+          renderItem={({ item }) => (
+            <View style={{ marginBottom: 24, width: 180 }}>
+              <Text style={styles.type}>{item.title}</Text>
+              <Text style={styles.value}>{item.value}</Text>
+            </View>
+          )}
+        />
       </View>
       <View style={styles.lowerContainer}>
         <Button label="Submit Application" onPress={onSubmitApplication} />

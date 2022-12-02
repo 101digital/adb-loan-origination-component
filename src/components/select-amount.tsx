@@ -9,52 +9,79 @@ import RangeSlider from '../components/common/range-slider';
 import { useState } from 'react';
 
 const MIN = 1;
-const MAX = 1000;
 
 export interface ISelectAmountComp {
-  onPressContinue: (amount: number, duration: number) => void;
+  onPressContinue: (amount?: number, duration?: number) => void;
+  creditLimit: number;
+  showAmount?: boolean;
+  showDuration?: boolean;
+  rangeLabel: string;
+  showInfo?: boolean;
+  title: string;
 }
 
 const SelectAmountComponent: React.FC<ISelectAmountComp> = (props: ISelectAmountComp) => {
-  const { onPressContinue } = props;
+  const {
+    title,
+    onPressContinue,
+    creditLimit = 0,
+    showAmount,
+    showDuration = true,
+    rangeLabel,
+    showInfo = true,
+  } = props;
   const [rangeAmount, setRangeAmount] = useState(600);
   const [duration, setDuration] = useState(1);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.title}>Select amount you want</Text>
-        <AlertMessage isInfo text="You’re eligible to apply for RM 5,000.00" />
-        <View style={styles.dataContainer}>
-          <View style={styles.centeredContainer}>
-            <Text style={styles.amountApplyText}>Amount apply</Text>
-            <Text style={styles.amountText}>RM {rangeAmount.toFixed(2)}</Text>
-          </View>
-          <View style={styles.centeredContainer}>
-            <Text style={styles.amountApplyText}>Tenure duration</Text>
-            <Text style={styles.amountText}>{duration} month</Text>
-          </View>
+        <Text style={styles.title}>{title}</Text>
+        {showInfo && (
+          <AlertMessage isInfo text={`You're eligible to apply for RM ${creditLimit.toFixed(2)}`} />
+        )}
+        <View
+          style={[
+            styles.dataContainer,
+            { justifyContent: showAmount && showDuration ? 'center' : 'flex-start' },
+          ]}
+        >
+          {showAmount && (
+            <View style={[styles.centeredContainer, { marginTop: !showDuration ? 30 : 0 }]}>
+              <Text style={styles.amountApplyText}>Amount apply</Text>
+              <Text style={styles.amountText}>RM {rangeAmount.toFixed(2)}</Text>
+            </View>
+          )}
+          {showDuration && (
+            <View style={[styles.centeredContainer, { marginTop: !showAmount ? 30 : 0 }]}>
+              <Text style={styles.amountApplyText}>Tenure duration</Text>
+              <Text style={styles.amountText}>{duration} month</Text>
+            </View>
+          )}
         </View>
-        <Text style={styles.selectAmountText}>Swipe to select amount (RM)</Text>
+
         <RangeSlider
           style={styles.amountSlider}
           min={MIN}
-          max={MAX}
-          initLow={600}
-          step={51}
+          max={creditLimit}
+          initLow={1}
+          step={showAmount ? 50 : 1}
           disableRange
           onValueChanged={(low: number, _: number, fromUser: boolean) => {
             if (fromUser) {
               Keyboard.dismiss();
-              setRangeAmount(low);
+              if (showAmount) {
+                setRangeAmount(low);
+              } else {
+                setDuration(low);
+              }
             }
           }}
           onTouch={() => {}}
+          title={rangeLabel}
+          minLabel={!showAmount ? `${MIN} month` : `RM ${MIN.toFixed(2)}`}
+          maxLabel={!showAmount ? `${creditLimit} month` : `RM ${creditLimit.toFixed(2)}`}
         />
-        <View style={styles.rangeTextContainer}>
-          <Text style={styles.amountApplyText}>RM {MIN.toFixed(2)}</Text>
-          <Text style={styles.amountApplyText}>RM {MAX.toFixed(2)}</Text>
-        </View>
       </View>
       <View style={styles.lowerContainer}>
         <Button label="Continue" onPress={() => onPressContinue(rangeAmount, duration)} />
@@ -137,7 +164,7 @@ const styles = StyleSheet.create({
   dataContainer: {
     flex: 1,
     backgroundColor: colors.white,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     marginBottom: 15,
   },
