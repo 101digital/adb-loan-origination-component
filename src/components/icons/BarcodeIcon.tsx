@@ -1,7 +1,7 @@
-import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
-function BarcodeIcon(props) {
+function BarcodeIcon(props: SvgProps) {
   return (
     <Svg
       width={24}
@@ -20,7 +20,7 @@ function BarcodeIcon(props) {
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
-export default BarcodeIcon
+export default BarcodeIcon;

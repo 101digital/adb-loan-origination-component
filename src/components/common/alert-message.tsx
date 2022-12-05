@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { colors } from '../../assets';
+import { StyleSheet, Text, View } from 'react-native';
+import { colors, palette } from '../../assets';
 import ShieldIcon from '../../components/icons/ShieldIcon';
-import { fonts } from '../../assets/fonts';
 import InfoIcon from '../icons/InfoIcon';
 
 interface IAlertMessage {
@@ -31,11 +30,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   text: {
+    ...palette.label,
     marginLeft: 11,
-    fontSize: 12,
-    lineHeight: 16,
     width: '70%',
-    color: '#3F3F3F',
-    fontFamily: fonts.regular,
   },
 });

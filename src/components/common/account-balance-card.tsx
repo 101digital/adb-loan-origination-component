@@ -1,7 +1,6 @@
-import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { colors } from '../../assets';
-import { fonts } from '../../assets/fonts';
+import { StyleSheet, Text, View } from 'react-native';
+import { colors, palette } from '../../assets';
 
 export interface IAccountBalanceProps {
   balance: number;
@@ -30,16 +29,10 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   accountBalanceText: {
-    fontFamily: fonts.regular,
-    fontSize: 14,
-    lineHeight: 20,
-    color: colors.secondary,
+    ...palette.highlight,
   },
   accountBalance: {
-    fontFamily: fonts.semiBold,
-    fontSize: 32,
-    lineHeight: 48,
+    ...palette.bigTitle,
     padding: 8,
-    color: colors.secondary,
   },
 });

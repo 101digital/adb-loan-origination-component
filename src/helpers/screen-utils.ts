@@ -1,4 +1,4 @@
-import { Platform, StatusBar, Dimensions, PixelRatio, NativeScrollEvent } from 'react-native';
+import { Dimensions, NativeScrollEvent, PixelRatio, Platform, StatusBar } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 const standardLength = width > height ? width : height;

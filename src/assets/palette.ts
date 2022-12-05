@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { fonts } from './fonts';
 import { colors } from './colors';
+import { fonts } from './fonts';
 
 export const palette = StyleSheet.create({
   bigTitle: {
@@ -21,7 +21,8 @@ export const palette = StyleSheet.create({
   highlight: {
     fontFamily: fonts.regular,
     fontSize: 14,
-    color: '#000000',
+    lineHeight: 20,
+    color: colors.black,
   },
   label: {
     fontFamily: fonts.regular,

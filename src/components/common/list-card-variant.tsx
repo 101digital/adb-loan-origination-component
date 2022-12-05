@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { withHeightPercent } from '../../helpers/screen-utils';
-import CircularImageView from '../../components/core/circular-image-view';
+import { StyleSheet, Text, View } from 'react-native';
+import { colors, palette } from '../../assets';
 import { fonts } from '../../assets/fonts';
+import CircularImageView from '../../components/core/circular-image-view';
+import { withHeightPercent } from '../../helpers/screen-utils';
 
 export interface IListCardVariant {
   title: string;
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: '#dddddd',
+    borderColor: colors.primary,
     borderRadius: 24,
     height: withHeightPercent(20),
     paddingHorizontal: 20,
@@ -46,9 +47,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   subTitle: {
-    fontFamily: fonts.regular,
-    fontSize: 12,
-    lineHeight: 16,
+    ...palette.label,
     width: '70%',
   },
 });

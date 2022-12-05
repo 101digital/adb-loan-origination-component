@@ -1,7 +1,6 @@
-import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { colors } from '../../assets';
-import { fonts } from '../../assets/fonts';
+import { StyleSheet, View } from 'react-native';
+import { colors, palette } from '../../assets';
 import CircularImageView from '../../components/core/circular-image-view';
 
 const data = [
@@ -47,14 +46,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   accountBalanceText: {
-    fontFamily: fonts.regular,
-    fontSize: 14,
-    lineHeight: 20,
+    ...palette.highlight,
     color: colors.secondary,
   },
   accountBalance: {
-    fontFamily: fonts.semiBold,
-    fontSize: 32,
+    ...palette.bigTitle,
     lineHeight: 48,
     padding: 8,
     color: colors.secondary,

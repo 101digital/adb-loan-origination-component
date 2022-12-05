@@ -7,7 +7,9 @@
   "types": "index.d.ts",
   "description": "Manage Loan Component Flow for aeon app",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "restyle": "npx prettier --write 'src/**/*.{ts,tsx,json,md}'",
+    "compile": "tsc --project tsconfig.json"
   },
   "keywords": [],
   "author": "Hitesh101D",

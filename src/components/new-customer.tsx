@@ -1,9 +1,10 @@
-import { View, Text, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import React from 'react';
-import TextWithIcon from '../components/core/text-with-icon';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { colors } from '../assets';
 import AlertMessage from '../components/common/alert-message';
 import Button from '../components/core/button';
-import { colors } from '../assets';
+import TextWithIcon from '../components/core/text-with-icon';
+import { string } from './constants';
 export interface INewCustomer {
   onPressContinue: () => void;
 }
@@ -26,8 +27,8 @@ const NewCustomerComponent: React.FC<INewCustomer> = (props: INewCustomer) => {
         </View>
       </ScrollView>
       <View style={styles.lowerContainer}>
-        <AlertMessage text="By continuing, I agree and comply with ADB's privacy policy and terms and conditions." />
-        <Button label="Continue" onPress={onPressContinue} />
+        <AlertMessage text={string.termsAndCondition} />
+        <Button label={string.continue} onPress={onPressContinue} />
       </View>
     </SafeAreaView>
   );
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingBottom: 20,
     borderBottomWidth: 1,
-    borderColor: '#DDDDDD',
+    borderColor: colors.primary,
   },
   lowerContainer: {
     paddingHorizontal: 24,

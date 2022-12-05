@@ -1,5 +1,5 @@
-import { colors } from './assets';
 import { StyleSheet } from 'react-native';
+import { colors } from './assets';
 import { withHeightPercent } from './helpers/screen-utils';
 export const styles = StyleSheet.create({
   container: {

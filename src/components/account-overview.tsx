@@ -1,16 +1,15 @@
-import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../assets';
 import { fonts } from '../assets/fonts';
-import { useState } from 'react';
+import AccountBalanceCard from '../components/common/account-balance-card';
+import FunctionalityList from '../components/common/functionality-list';
+import ListCard from '../components/common/list-card';
 import CircularImageView from '../components/core/circular-image-view';
 import BarcodeIcon from '../components/icons/BarcodeIcon';
-import AccountBalanceCard from '../components/common/account-balance-card';
-import ListCard from '../components/common/list-card';
-import FunctionalityList from '../components/common/functionality-list';
 
 const AccountDetail = () => {
-  const [username, setUsername] = useState('Aeolanda!');
+  const [username] = useState('Aeolanda!');
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>

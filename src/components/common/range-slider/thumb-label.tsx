@@ -1,7 +1,7 @@
-import { colors } from '../../../assets';
-import {fonts} from '../../../assets/fonts';
 import React, { memo } from 'react';
-import { View, StyleSheet, Text, StyleProp, TextStyle } from 'react-native';
+import { StyleProp, StyleSheet, Text, TextStyle, View } from 'react-native';
+import { colors } from '../../../assets';
+import { fonts } from '../../../assets/fonts';
 
 const THUMB_RADIUS = 12;
 
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderRadius: THUMB_RADIUS,
     borderWidth: 2,
     borderColor: colors.primary,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.white,
   },
   label: {
     position: 'absolute',
