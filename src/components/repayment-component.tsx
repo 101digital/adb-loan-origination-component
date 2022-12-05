@@ -1,10 +1,10 @@
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import React from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../assets';
+import { fonts } from '../assets/fonts';
+import AlertMessage from '../components/common/alert-message';
 import Button from '../components/core/button';
 import { withWidthPercent } from '../helpers/screen-utils';
-import AlertMessage from '../components/common/alert-message';
-import { fonts } from '../assets/fonts';
 
 export interface IRepaymentComponent {
   onProceedToPay: () => void;

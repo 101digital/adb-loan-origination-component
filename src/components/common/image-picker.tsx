@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { colors } from '../../assets';
 import ImageIcon from '../../components/icons/ImageIcon';
 
@@ -10,27 +10,27 @@ const ImagePicker = () => {
         <ImageIcon />
       </View>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 export default ImagePicker;
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor:colors.primary,
-        justifyContent:'center',
-        alignItems:'center',
-        paddingVertical: 50,
-        width: '75%',
-        alignSelf:'center',
-        borderRadius: 16,
-    },
-    imageIconContainer: {
-        backgroundColor: '#A5A5A5',
-        borderRadius: 100,
-        height: 56,
-        width: 56,
-        justifyContent:'center',
-        alignItems:'center'
-    }
-})
+  container: {
+    backgroundColor: colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 50,
+    width: '75%',
+    alignSelf: 'center',
+    borderRadius: 16,
+  },
+  imageIconContainer: {
+    backgroundColor: '#A5A5A5',
+    borderRadius: 100,
+    height: 56,
+    width: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

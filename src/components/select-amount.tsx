@@ -1,12 +1,12 @@
-import { View, Text, SafeAreaView, StyleSheet, Keyboard } from 'react-native';
-import React from 'react';
-import { withHeightPercent } from '../helpers/screen-utils';
+import React, { useState } from 'react';
+import { Keyboard, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../assets';
-import AlertMessage from '../components/common/alert-message';
-import Button from '../components/core/button';
 import { fonts } from '../assets/fonts';
+import AlertMessage from '../components/common/alert-message';
 import RangeSlider from '../components/common/range-slider';
-import { useState } from 'react';
+import Button from '../components/core/button';
+import { withHeightPercent } from '../helpers/screen-utils';
+import { string } from './constants';
 
 const MIN = 1;
 
@@ -84,7 +84,7 @@ const SelectAmountComponent: React.FC<ISelectAmountComp> = (props: ISelectAmount
         />
       </View>
       <View style={styles.lowerContainer}>
-        <Button label="Continue" onPress={() => onPressContinue(rangeAmount, duration)} />
+        <Button label={string.continue} onPress={() => onPressContinue(rangeAmount, duration)} />
       </View>
     </SafeAreaView>
   );

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Svg, { Path } from 'react-native-svg';
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
-function InfoIcon(props) {
+function InfoIcon(props: SvgProps) {
   return (
     <Svg
       width={18}

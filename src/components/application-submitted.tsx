@@ -1,7 +1,7 @@
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import React from 'react';
-import Button from '../components/core/button';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../assets';
+import Button from '../components/core/button';
 import { withHeightPercent } from '../helpers/screen-utils';
 import RawImageIcon from './icons/RawImageIcon';
 

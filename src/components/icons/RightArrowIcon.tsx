@@ -1,7 +1,7 @@
-import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
-function RightArrowIcon(props) {
+function RightArrowIcon(props: SvgProps) {
   return (
     <Svg
       width={9}
@@ -19,7 +19,7 @@ function RightArrowIcon(props) {
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
-export default RightArrowIcon
+export default RightArrowIcon;

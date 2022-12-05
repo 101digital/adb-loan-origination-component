@@ -2,11 +2,11 @@ import React, { forwardRef, useCallback, useImperativeHandle, useState } from 'r
 import { StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native';
 // @ts-ignore
 import Slider from 'rn-range-slider';
-import Thumb from './thumb';
+import { fonts } from '../../../assets/fonts';
 import Rail from './rail';
 import RailSelected from './rail-selected';
+import Thumb from './thumb';
 import ThumbLabel from './thumb-label';
-import { fonts } from '../../../assets/fonts';
 
 export type RangeSliderProps = {
   min: number;

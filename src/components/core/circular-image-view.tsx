@@ -1,6 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { colors } from '../../assets';
+import { StyleSheet, Text, View } from 'react-native';
 import ImageIcon from '../../components/icons/ImageIcon';
 
 export interface ICircularImageView {

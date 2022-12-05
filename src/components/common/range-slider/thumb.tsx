@@ -1,6 +1,6 @@
-import { colors } from '../../../assets';
 import React, { memo } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { colors } from '../../../assets';
 const THUMB_RADIUS = 12;
 
 const Thumb = () => {

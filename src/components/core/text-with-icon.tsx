@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity } from 'react-native';
-import ImageIcon from '../icons/ImageIcon';
-import { fonts } from '../../assets/fonts';
 import { colors } from '../../assets';
+import { fonts } from '../../assets/fonts';
+import ImageIcon from '../icons/ImageIcon';
 
 const TextWithIcon = ({ title }: { title: string }) => {
   return (

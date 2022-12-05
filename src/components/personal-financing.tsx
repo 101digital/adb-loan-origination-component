@@ -1,12 +1,11 @@
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import React from 'react';
-import ImagePicker from '../components/common/image-picker';
-import ImageIcon from '../components/icons/ImageIcon';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { colors } from '../assets';
 import AlertMessage from '../components/common/alert-message';
 import Button from '../components/core/button';
-import TextWithIcon from './core/text-with-icon';
-import { colors } from '../assets';
 import ImageSwiper from './common/image-swiper';
+import { string } from './constants';
+import TextWithIcon from './core/text-with-icon';
 
 export interface ICashAdvance {
   onApplyNowPress: () => void;
@@ -29,8 +28,8 @@ const PersonalFinancingComponent: React.FC<ICashAdvance> = (props: ICashAdvance)
         </View>
       </ScrollView>
       <View style={styles.lowerContainer}>
-        <AlertMessage text="By continuing, I agree and comply with ADB's privacy policy and terms and conditions." />
-        <Button label="Apply Now" onPress={onApplyNowPress} />
+        <AlertMessage text={string.termsAndCondition} />
+        <Button label={string.applyNow} onPress={onApplyNowPress} />
       </View>
     </SafeAreaView>
   );

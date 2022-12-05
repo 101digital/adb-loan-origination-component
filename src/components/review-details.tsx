@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import React, { useContext } from 'react';
-import Button from '../components/core/button';
-import { fonts } from '../assets/fonts';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../assets';
+import { fonts } from '../assets/fonts';
+import Button from '../components/core/button';
 import { LoanOriginationContext } from '../contexts';
+import { string } from './constants';
 
 export interface IReviewDetails {
   onPressContinue: () => void;
@@ -53,7 +54,7 @@ const ReviewDetailsComponent: React.FC<IReviewDetails> = (props: IReviewDetails)
           />
         </View>
         <Button
-          label="Continue"
+          label={string.continue}
           onPress={() => {
             changeUserStatus();
             onPressContinue();

@@ -1,6 +1,6 @@
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { colors } from '../../assets';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { colors, palette } from '../../assets';
 
 interface IButton {
   background?: string;
@@ -30,8 +30,7 @@ const styles = StyleSheet.create({
     borderColor: colors.secondary,
   },
   label: {
-    fontSize: 16,
-    fontWeight: '600',
+    ...palette.subtitle,
     textAlign: 'center',
   },
 });

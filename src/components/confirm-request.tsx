@@ -1,8 +1,8 @@
-import { View, Text, SafeAreaView, StyleSheet, FlatList } from 'react-native';
 import React from 'react';
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../assets';
-import Button from '../components/core/button';
 import { fonts } from '../assets/fonts';
+import Button from '../components/core/button';
 
 export interface requestDataTypes {
   id: string;
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingBottom: 20,
     borderBottomWidth: 1,
-    borderColor: '#DDDDDD',
+    borderColor: colors.primary,
   },
   lowerContainer: {
     paddingHorizontal: 24,

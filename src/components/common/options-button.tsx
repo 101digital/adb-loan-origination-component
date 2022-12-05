@@ -1,9 +1,8 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { colors } from '../../assets';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { colors, palette } from '../../assets';
 import RightArrowIcon from '../../components/icons/RightArrowIcon';
 import { loanDataType } from '../../contexts/types';
-import { fonts } from '../../assets/fonts';
 export interface IOptionsButton {
   title: string;
   onClick: () => void;
@@ -54,8 +53,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 16,
-    fontFamily: fonts.semiBold,
+    ...palette.subtitle,
     color: colors.secondary,
   },
   progressContainer: {

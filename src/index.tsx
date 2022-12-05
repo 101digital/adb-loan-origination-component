@@ -1,10 +1,9 @@
-import { View, Text, FlatList } from 'react-native';
-import React, { useMemo } from 'react';
-import { styles } from './styles';
+import React, { useContext, useMemo } from 'react';
+import { FlatList, Text, View } from 'react-native';
 import OptionsButton from './components/common/options-button';
-import { useContext } from 'react';
 import { LoanOriginationContext } from './contexts';
 import { sortnull } from './helpers/sort-null';
+import { styles } from './styles';
 export interface ILoanComponent {
   onCashAdvancePress: () => void;
   onFinancePress: () => void;

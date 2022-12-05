@@ -1,7 +1,7 @@
-import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
-function ShieldIcon(props) {
+function ShieldIcon(props: SvgProps) {
   return (
     <Svg
       width={16}
@@ -24,7 +24,7 @@ function ShieldIcon(props) {
         fill="#1B1B1B"
       />
     </Svg>
-  )
+  );
 }
 
-export default ShieldIcon
+export default ShieldIcon;
