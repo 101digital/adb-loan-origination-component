@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ThemeContext } from 'react-native-theme-component';
 import { colors } from '../assets';
 import { fonts } from '../assets/fonts';
 import AccountBalanceCard from '../components/common/account-balance-card';
@@ -10,6 +11,7 @@ import BarcodeIcon from '../components/icons/BarcodeIcon';
 
 const AccountDetail = () => {
   const [username] = useState('Aeolanda!');
+  const { i18n } = useContext(ThemeContext);
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -19,7 +21,9 @@ const AccountDetail = () => {
         </View>
         <View style={styles.membershipContainer}>
           <View style={{ marginBottom: 24 }}>
-            <Text style={styles.type}>Membership ID</Text>
+            <Text style={styles.type}>
+              {i18n?.t('loan-origination-component.lbl_mem_id') ?? 'Membership ID'}
+            </Text>
             <View style={styles.row}>
               <Text style={styles.value}>2022 0302 1992 1120</Text>
               <TouchableOpacity style={styles.barcodeIconContainer}>
@@ -28,7 +32,9 @@ const AccountDetail = () => {
             </View>
           </View>
           <View style={{ marginBottom: 24, alignItems: 'flex-end' }}>
-            <Text style={styles.type}>Member Plus Point</Text>
+            <Text style={styles.type}>
+              {i18n?.t('loan-origination-component.lbl_mem_point') ?? 'Membership Plus Point'}
+            </Text>
             <Text style={styles.value}>1,000 pts</Text>
           </View>
         </View>

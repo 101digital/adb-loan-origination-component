@@ -1,5 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import { FlatList, Text, View } from 'react-native';
+import { ThemeContext } from 'react-native-theme-component';
 import OptionsButton from './components/common/options-button';
 import { LoanOriginationContext } from './contexts';
 import { sortnull } from './helpers/sort-null';
@@ -18,6 +19,7 @@ const LoanComponent: React.FC<ILoanComponent> = (props: ILoanComponent) => {
     advanceCashLoanData,
     personalFinanceLoanData,
   } = useContext(LoanOriginationContext);
+  const { i18n } = useContext(ThemeContext);
   const options = useMemo(
     () => [
       {
@@ -62,7 +64,9 @@ const LoanComponent: React.FC<ILoanComponent> = (props: ILoanComponent) => {
           <View style={styles.navContainer}>
             <Text style={styles.navHeaderText}>Finance</Text>
             <View style={styles.totalLimitContainer}>
-              <Text style={styles.totalLimitTitleText}>Total limit</Text>
+              <Text style={styles.totalLimitTitleText}>
+                {i18n?.t('loan-origination-component.lbl_ttl_lmt') ?? 'Total limit'}
+              </Text>
               <Text style={styles.totalLimitText}>RM 0.00</Text>
             </View>
           </View>

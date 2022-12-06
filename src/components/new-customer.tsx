@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ThemeContext } from 'react-native-theme-component';
 import { colors } from '../assets';
 import AlertMessage from '../components/common/alert-message';
 import Button from '../components/core/button';
@@ -11,24 +12,48 @@ export interface INewCustomer {
 
 const NewCustomerComponent: React.FC<INewCustomer> = (props: INewCustomer) => {
   const { onPressContinue } = props;
+  const { i18n } = useContext(ThemeContext);
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.title}>It seems you are a new financing customer</Text>
+          <Text style={styles.title}>
+            {i18n?.t('loan-origination-component.lbl_new_customer') ??
+              'It seems you are a new financing customer'}
+          </Text>
           <Text style={styles.subTitle}>Before we proceed...</Text>
           <View style={styles.pointsContainer}>
-            <TextWithIcon title="We’ll run credit & background checks to determine your eligibility." />
-            <TextWithIcon title="If approved, we’ll grant you a credit limit that you can use across all financing products." />
-            <TextWithIcon title="If you don’t have a Savings Account with us, open one for you and make payments." />
+            <TextWithIcon
+              title={
+                i18n?.t('loan-origination-component.msg_fnc_cust_point1') ??
+                "We'll run credit & background checks to determine your eligibility."
+              }
+            />
+            <TextWithIcon
+              title={
+                i18n?.t('loan-origination-component.msg_fnc_cust_point2') ??
+                "If approved, we'll grant you a credit limit that you can use across all financing products."
+              }
+            />
+            <TextWithIcon
+              title={
+                i18n?.t('loan-origination-component.msg_fnc_cust_point3') ??
+                "If you don't have a Savings Account with us, open one for you and make payments."
+              }
+            />
           </View>
-          <TextWithIcon title="T&Cs" />
+          <TextWithIcon title={i18n?.t('loan-origination-component.lbl_tnc') ?? 'T&Cs'} />
           <TextWithIcon title="PDPA" />
         </View>
       </ScrollView>
       <View style={styles.lowerContainer}>
-        <AlertMessage text={string.termsAndCondition} />
-        <Button label={string.continue} onPress={onPressContinue} />
+        <AlertMessage
+          text={i18n?.t('loan-origination-component.msg_tc') ?? string.termsAndCondition}
+        />
+        <Button
+          label={i18n?.t('loan-origination-component.btn_continue') ?? string.continue}
+          onPress={onPressContinue}
+        />
       </View>
     </SafeAreaView>
   );
