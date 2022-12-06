@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ThemeContext } from 'react-native-theme-component';
 import { colors } from '../assets';
 import { fonts } from '../assets/fonts';
 import Button from '../components/core/button';
@@ -12,16 +13,24 @@ export interface IReviewDetails {
 const ReviewDetailsComponent: React.FC<IReviewDetails> = (props: IReviewDetails) => {
   const { onPressContinue } = props;
   const { changeUserStatus } = useContext(LoanOriginationContext);
+  const { i18n } = useContext(ThemeContext);
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.title}>Review your details</Text>
-          <Text style={styles.subTitle}>Please confirm your details are up to date.</Text>
+          <Text style={styles.title}>
+            {i18n?.t('loan-origination-component.lbl_review_detail') ?? 'Review your details'}
+          </Text>
+          <Text style={styles.subTitle}>
+            {i18n?.t('loan-origination-component.lbl_confirm_detial') ??
+              'Please confirm your details are up to date.'}
+          </Text>
           <View style={styles.contactInfoContainer}>
             <Text style={styles.subContainerTitle}>Contact Info</Text>
             <View style={{ marginBottom: 24 }}>
-              <Text style={styles.type}>Address</Text>
+              <Text style={styles.type}>
+                {i18n?.t('loan-origination-component.lbl_address') ?? 'Address'}
+              </Text>
               <Text style={styles.value}>
                 Olive P5-20 Empire Residence 40170 Damansara Perdana Selangor
               </Text>
@@ -30,15 +39,21 @@ const ReviewDetailsComponent: React.FC<IReviewDetails> = (props: IReviewDetails)
           <View style={styles.contactInfoContainer}>
             <Text style={styles.subContainerTitle}>Employment info</Text>
             <View style={{ marginBottom: 24 }}>
-              <Text style={styles.type}>Employment type</Text>
+              <Text style={styles.type}>
+                {i18n?.t('loan-origination-component.lbl_emp_type') ?? 'Employment type'}
+              </Text>
               <Text style={styles.value}>Private</Text>
             </View>
             <View style={{ marginBottom: 24 }}>
-              <Text style={styles.type}>Employment sector</Text>
+              <Text style={styles.type}>
+                {i18n?.t('loan-origination-component.lbl_emp_sector') ?? 'Employment sector'}
+              </Text>
               <Text style={styles.value}>Hospitality Industry</Text>
             </View>
             <View style={{ marginBottom: 24 }}>
-              <Text style={styles.type}>Name of employer</Text>
+              <Text style={styles.type}>
+                {i18n?.t('loan-origination-component.lbl_emp_name') ?? 'Name of employer'}
+              </Text>
               <Text style={styles.value}>Four Season Hotel</Text>
             </View>
           </View>
@@ -47,14 +62,16 @@ const ReviewDetailsComponent: React.FC<IReviewDetails> = (props: IReviewDetails)
       <View style={styles.lowerContainer}>
         <View style={{ marginBottom: 8 }}>
           <Button
-            label="My details are outdated"
+            label={
+              i18n?.t('loan-origination-component.btn_dtls_outdated') ?? 'My details are outdated'
+            }
             background={colors.white}
             labelColor={colors.secondary}
             onPress={() => {}}
           />
         </View>
         <Button
-          label={string.continue}
+          label={i18n?.t('loan-origination-component.btn_continue') ?? string.continue}
           onPress={() => {
             changeUserStatus();
             onPressContinue();

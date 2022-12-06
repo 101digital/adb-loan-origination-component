@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Keyboard, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ThemeContext } from 'react-native-theme-component';
 import { colors } from '../assets';
 import { fonts } from '../assets/fonts';
 import AlertMessage from '../components/common/alert-message';
@@ -30,6 +31,7 @@ const SelectAmountComponent: React.FC<ISelectAmountComp> = (props: ISelectAmount
     rangeLabel,
     showInfo = true,
   } = props;
+  const { i18n } = useContext(ThemeContext);
   const [rangeAmount, setRangeAmount] = useState(600);
   const [duration, setDuration] = useState(1);
 
@@ -38,7 +40,14 @@ const SelectAmountComponent: React.FC<ISelectAmountComp> = (props: ISelectAmount
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         {showInfo && (
-          <AlertMessage isInfo text={`You're eligible to apply for RM ${creditLimit.toFixed(2)}`} />
+          <AlertMessage
+            isInfo
+            text={
+              i18n?.t('loan-origination-component.lbl_amount_elg', {
+                credit: creditLimit.toFixed(2),
+              }) ?? `You're eligible to apply for RM ${creditLimit.toFixed(2)}`
+            }
+          />
         )}
         <View
           style={[
@@ -48,13 +57,17 @@ const SelectAmountComponent: React.FC<ISelectAmountComp> = (props: ISelectAmount
         >
           {showAmount && (
             <View style={[styles.centeredContainer, { marginTop: !showDuration ? 30 : 0 }]}>
-              <Text style={styles.amountApplyText}>Amount apply</Text>
+              <Text style={styles.amountApplyText}>
+                {i18n?.t('loan-origination-component.lbl_amt_apply') ?? 'Amount apply'}
+              </Text>
               <Text style={styles.amountText}>RM {rangeAmount.toFixed(2)}</Text>
             </View>
           )}
           {showDuration && (
             <View style={[styles.centeredContainer, { marginTop: !showAmount ? 30 : 0 }]}>
-              <Text style={styles.amountApplyText}>Tenure duration</Text>
+              <Text style={styles.amountApplyText}>
+                {i18n?.t('loan-origination-component.lbl_ten_duration') ?? 'Tenure duration'}
+              </Text>
               <Text style={styles.amountText}>{duration} month</Text>
             </View>
           )}
@@ -84,7 +97,10 @@ const SelectAmountComponent: React.FC<ISelectAmountComp> = (props: ISelectAmount
         />
       </View>
       <View style={styles.lowerContainer}>
-        <Button label={string.continue} onPress={() => onPressContinue(rangeAmount, duration)} />
+        <Button
+          label={i18n?.t('loan-origination-component.btn_continue') ?? string.continue}
+          onPress={() => onPressContinue(rangeAmount, duration)}
+        />
       </View>
     </SafeAreaView>
   );

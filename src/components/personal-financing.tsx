@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ThemeContext } from 'react-native-theme-component';
 import { colors } from '../assets';
 import AlertMessage from '../components/common/alert-message';
 import Button from '../components/core/button';
@@ -13,23 +14,37 @@ export interface ICashAdvance {
 
 const PersonalFinancingComponent: React.FC<ICashAdvance> = (props: ICashAdvance) => {
   const { onApplyNowPress } = props;
+  const { i18n } = useContext(ThemeContext);
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.title}>Personal Financing-i</Text>
-          <Text style={styles.subTitle}>Your amazing banking experience.</Text>
+          <Text style={styles.subTitle}>
+            {i18n?.t('loan-origination-component.lbl_amz_exp') ??
+              'Your amazing banking experience.'}
+          </Text>
           <View style={styles.imageContainer}>
             <ImageSwiper />
           </View>
-          <TextWithIcon title="Benefits" />
-          <TextWithIcon title="T&Cs" />
-          <TextWithIcon title="Product Disclosure Sheets" />
+          <TextWithIcon title={i18n?.t('loan-origination-component.lbl_benefits') ?? 'Benefits'} />
+          <TextWithIcon title={i18n?.t('loan-origination-component.lbl_tnc') ?? 'T&Cs'} />
+          <TextWithIcon
+            title={
+              i18n?.t('loan-origination-component.lbl_prodcut_sheets') ??
+              'Product Disclosure Sheets'
+            }
+          />
         </View>
       </ScrollView>
       <View style={styles.lowerContainer}>
-        <AlertMessage text={string.termsAndCondition} />
-        <Button label={string.applyNow} onPress={onApplyNowPress} />
+        <AlertMessage
+          text={i18n?.t('loan-origination-component.msg_tc') ?? string.termsAndCondition}
+        />
+        <Button
+          label={i18n?.t('loan-origination-component.btn_apply_now') ?? string.applyNow}
+          onPress={onApplyNowPress}
+        />
       </View>
     </SafeAreaView>
   );

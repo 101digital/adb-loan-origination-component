@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ThemeContext } from 'react-native-theme-component';
 import { colors } from '../assets';
 import { fonts } from '../assets/fonts';
 import Button from '../components/core/button';
@@ -18,6 +19,7 @@ export interface IConfirmRequest {
 
 const ConfirmRequestComponent: React.FC<IConfirmRequest> = (props: IConfirmRequest) => {
   const { onPressEdit, onSubmitApplication, requestData = [] } = props;
+  const { i18n } = useContext(ThemeContext);
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -41,7 +43,10 @@ const ConfirmRequestComponent: React.FC<IConfirmRequest> = (props: IConfirmReque
         />
       </View>
       <View style={styles.lowerContainer}>
-        <Button label="Submit Application" onPress={onSubmitApplication} />
+        <Button
+          label={i18n?.t('loan-origination-component.btn_submit_app') ?? 'Submit Application'}
+          onPress={onSubmitApplication}
+        />
       </View>
     </SafeAreaView>
   );
