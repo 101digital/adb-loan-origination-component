@@ -13,7 +13,6 @@
   },
   "keywords": [],
   "author": "Hitesh101D",
-  "dependencies": {},
   "devDependencies": {
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@types/lodash": "^4.14.190",
@@ -21,9 +20,7 @@
     "@types/react-native": "^0.70.7",
     "react-native-svg": "^13.6.0",
     "rn-range-slider": "^2.2.2",
+    "react-native-theme-component": "https://github.com/101digital/react-native-theme-component.git",
     "typescript": "^4.4.2"
-  },
-  "peerDependencies": {
-    "react-native-svg": "^13.6.0"
   }
 }
