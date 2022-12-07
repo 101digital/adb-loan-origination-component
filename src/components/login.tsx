@@ -24,7 +24,7 @@ export interface ILogin {
 const LoginComponent: React.FC<ILogin> = (props: ILogin) => {
   const { onLoginSuccess, onLoginFailed } = props;
   const { deviceCountryCode, countries } = useContext(ThemeContext);
-  const { login, errorSignIn } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const handleOnSignIn = async (values: SignInData) => {
     Keyboard.dismiss();
@@ -34,7 +34,7 @@ const LoginComponent: React.FC<ILogin> = (props: ILogin) => {
     const profile = await login(_username, password, _country);
     if (profile) {
       onLoginSuccess();
-    } else if (errorSignIn) {
+    } else {
       onLoginFailed();
     }
   };
