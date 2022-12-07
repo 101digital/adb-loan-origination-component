@@ -8,6 +8,9 @@ export { default as ConfirmRequestComponent } from './src/components/confirm-req
 export { default as AccountDetail } from './src/components/account-overview';
 export { default as RepaymentComponent } from './src/components/repayment-component';
 export { default as PersonalFinancingComponent } from './src/components/personal-financing';
+export { default as LoginComponent } from './src/components/login';
+export { default as LandingComponent } from './src/components/landing';
+
 export {
   LoanOriginationContext,
   LoanOriginationProvider,

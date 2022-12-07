@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ThemeContext } from 'react-native-theme-component';
+import { AuthContext } from 'react-native-auth-component';
 import { colors } from '../assets';
 import { fonts } from '../assets/fonts';
 import AccountBalanceCard from '../components/common/account-balance-card';
@@ -10,13 +11,15 @@ import CircularImageView from '../components/core/circular-image-view';
 import BarcodeIcon from '../components/icons/BarcodeIcon';
 
 const AccountDetail = () => {
-  const [username] = useState('Aeolanda!');
+  const { profile } = useContext(AuthContext);
   const { i18n } = useContext(ThemeContext);
+  const fullName = `${profile?.firstName} ${profile?.lastName}`.trim();
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.profileNameContainer}>
-          <Text style={styles.usernameText}>Hi, {username}</Text>
+          <Text style={styles.usernameText}>Hi, {fullName}</Text>
           <CircularImageView />
         </View>
         <View style={styles.membershipContainer}>

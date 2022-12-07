@@ -9,6 +9,9 @@ export { default as PersonalFinancingComponent } from './src/components/personal
 export { default as RepaymentComponent } from './src/components/repayment-component';
 export { default as ReviewDetailsComponent } from './src/components/review-details';
 export { default as SelectAmountComponent } from './src/components/select-amount';
+export { default as LoginComponent } from './src/components/login';
+export { default as LandingComponent } from './src/components/landing';
+
 export {
   loanDataType,
   LoanOriginationContext,
