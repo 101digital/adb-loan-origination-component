@@ -7,6 +7,11 @@ export interface ILoanContext {
   isPersonalLoanApplied: boolean; // Returns `true` if user has applied for Personal Finance
   personalFinanceLoanData: loanDataType | null; // Returns personal finacne loan data of the user
   clearLoanData: (type: loanType) => void; // Clears the user loan data, if payed
+
+  getWallets: () => void;
+  wallets: Wallets[];
+  isLoadingGetWallets: boolean;
+  errorGetWallets?: Error;
 }
 
 export interface loanDataType {
@@ -18,4 +23,32 @@ export interface loanDataType {
 export enum loanType {
   ADVANCE_CASH = 'cash-advance',
   PERSONAL_FINANCE = 'personal-finance',
+}
+
+export type Wallets = {
+  "internalId": string,
+  "walletId": string,
+  "userId": string,
+  "walletName": string,
+  "currentBalance": number,
+  "availableBalance": number,
+  "minimumBalance": number,
+  "bankAccount": {
+      "bankCode": string,
+      "bankCustomerId": string,
+      "bankName": string,
+      "accountNumber": string,
+      "accountType": string,
+      "accountHolderName": string,
+      "productId": string,
+      "internalProductCategory": string,
+      "accountId": string,
+      "id": string
+  },
+  "currencyCode": string,
+  "status": string,
+  "type": string,
+  "isDefaultWallet": boolean,
+  "expiredAt": string,
+  "createdAt": string,
 }

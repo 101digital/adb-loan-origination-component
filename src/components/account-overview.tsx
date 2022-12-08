@@ -1,19 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ThemeContext } from 'react-native-theme-component';
 import { AuthContext } from 'react-native-auth-component';
 import { colors } from '../assets';
 import { fonts } from '../assets/fonts';
-import AccountBalanceCard from '../components/common/account-balance-card';
-import FunctionalityList from '../components/common/functionality-list';
-import ListCard from '../components/common/list-card';
-import CircularImageView from '../components/core/circular-image-view';
-import BarcodeIcon from '../components/icons/BarcodeIcon';
+import AccountBalanceCard from './common/account-balance-card';
+import FunctionalityList from './common/functionality-list';
+import ListCard from './common/list-card';
+import CircularImageView from './core/circular-image-view';
+import BarcodeIcon from './icons/BarcodeIcon';
+import { LoanOriginationContext } from '../contexts';
 
 const AccountDetail = () => {
   const { profile } = useContext(AuthContext);
   const { i18n } = useContext(ThemeContext);
   const fullName = `${profile?.firstName} ${profile?.lastName}`.trim();
+  const { wallets, getWallets } = useContext(LoanOriginationContext);
+  const currentBalance = wallets.length > 0 ? wallets[0].currentBalance : 0;
+
+  useEffect(() => {
+    getWallets();
+  }, []);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -41,7 +48,7 @@ const AccountDetail = () => {
             <Text style={styles.value}>1,000 pts</Text>
           </View>
         </View>
-        <AccountBalanceCard balance={630} />
+        <AccountBalanceCard balance={currentBalance} />
         <ListCard />
         <FunctionalityList />
       </View>
