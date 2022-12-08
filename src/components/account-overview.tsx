@@ -10,6 +10,7 @@ import ListCard from './common/list-card';
 import CircularImageView from './core/circular-image-view';
 import BarcodeIcon from './icons/BarcodeIcon';
 import { LoanOriginationContext } from '../contexts';
+import Carousel from "react-native-snap-carousel";
 
 const AccountDetail = () => {
   const { profile } = useContext(AuthContext);
@@ -50,7 +51,11 @@ const AccountDetail = () => {
         </View>
         <AccountBalanceCard balance={currentBalance} isLoading={isLoadingGetWallets} />
         <ListCard />
-        <FunctionalityList />
+        <FunctionalityList listAccount={wallets.map((w) => ({
+          id: w.walletId,
+          title: w.walletName,
+          subTitle: `${w.currentBalance} ${w.currencyCode}`
+        }))} />
       </View>
     </SafeAreaView>
   );

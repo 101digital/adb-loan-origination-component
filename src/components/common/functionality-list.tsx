@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import ListCardVariant from '../../components/common/list-card-variant';
 
-const data = [
+const dummyData = [
   {
     id: '1',
     title: 'Personal Financing',
@@ -20,11 +20,21 @@ const data = [
   },
 ];
 
-const FunctionalityList = () => {
+type Item = {
+  id: string;
+  title: string;
+  subTitle: string;
+}
+
+type FunctionalityList = {
+  listAccount: Item[]
+}
+
+const FunctionalityList = ({listAccount = dummyData}: FunctionalityList) => {
   return (
     <FlatList
       style={{ marginVertical: 20 }}
-      data={data}
+      data={listAccount}
       renderItem={({ item }) => (
         <ListCardVariant key={item.id} title={item.title} subTitle={item.subTitle} />
       )}
