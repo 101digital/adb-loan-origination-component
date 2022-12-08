@@ -12,7 +12,12 @@ import BarcodeIcon from './icons/BarcodeIcon';
 import { LoanOriginationContext } from '../contexts';
 import Carousel from "react-native-snap-carousel";
 
-const AccountDetail = () => {
+type AccountDetailProps = {
+  onNavigateToSetting: () => void;
+}
+
+const AccountDetail = (props: AccountDetailProps) => {
+  const { onNavigateToSetting } = props;
   const { profile } = useContext(AuthContext);
   const { i18n } = useContext(ThemeContext);
   const fullName = `${profile?.firstName} ${profile?.lastName}`.trim();
@@ -28,7 +33,9 @@ const AccountDetail = () => {
       <View style={styles.container}>
         <View style={styles.profileNameContainer}>
           <Text style={styles.usernameText}>{`${i18n?.t('loan-origination-component.lbl_hi')}, ${fullName}`}</Text>
-          <CircularImageView />
+          <TouchableOpacity onPress={onNavigateToSetting}>
+            <CircularImageView />
+          </TouchableOpacity>
         </View>
         <View style={styles.membershipContainer}>
           <View style={{ marginBottom: 24 }}>
