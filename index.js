@@ -14,6 +14,6 @@ export {
   LoanOriginationProvider,
   loanType,
   loanDataType,
-} from '../contexts';
+} from './src/contexts';
 
 export { LoanService } from './src/services/loan-service';

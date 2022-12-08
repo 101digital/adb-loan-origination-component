@@ -15,7 +15,7 @@ const AccountDetail = () => {
   const { profile } = useContext(AuthContext);
   const { i18n } = useContext(ThemeContext);
   const fullName = `${profile?.firstName} ${profile?.lastName}`.trim();
-  const { wallets, getWallets } = useContext(LoanOriginationContext);
+  const { wallets, getWallets, isLoadingGetWallets } = useContext(LoanOriginationContext);
   const currentBalance = wallets.length > 0 ? wallets[0].currentBalance : 0;
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const AccountDetail = () => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.profileNameContainer}>
-          <Text style={styles.usernameText}>Hi, {fullName}</Text>
+          <Text style={styles.usernameText}>{`${i18n?.t('loan-origination-component.lbl_hi')}, ${fullName}`}</Text>
           <CircularImageView />
         </View>
         <View style={styles.membershipContainer}>
@@ -48,7 +48,7 @@ const AccountDetail = () => {
             <Text style={styles.value}>1,000 pts</Text>
           </View>
         </View>
-        <AccountBalanceCard balance={currentBalance} />
+        <AccountBalanceCard balance={currentBalance} isLoading={isLoadingGetWallets} />
         <ListCard />
         <FunctionalityList />
       </View>
