@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors, palette } from '../../assets';
 import { fonts } from '../../assets/fonts';
 import CircularImageView from '../../components/core/circular-image-view';
@@ -8,18 +8,19 @@ import { withHeightPercent } from '../../helpers/screen-utils';
 export interface IListCardVariant {
   title: string;
   subTitle: string;
+  onSelect: () => void;
 }
 
 const ListCardVariant: React.FC<IListCardVariant> = (props: IListCardVariant) => {
-  const { title = '', subTitle = '' } = props;
+  const { title = '', subTitle = '', onSelect } = props;
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onSelect} style={styles.container}>
       <CircularImageView />
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subTitle}>{subTitle}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,6 +1,7 @@
+import { LoanService } from '../services/loan-service';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import loanComponentStore from '../services/local-store';
-import { ILoanContext, loanDataType, loanType } from './types';
+import { ILoanContext, loanDataType, loanType, Wallets } from './types';
 
 export const loanContextDefaultValue: ILoanContext = {
   isNewFinanceCustomer: false,
@@ -11,9 +12,15 @@ export const loanContextDefaultValue: ILoanContext = {
   advanceCashLoanData: null,
   personalFinanceLoanData: null,
   clearLoanData: () => undefined,
+  getWallets: () => undefined,
+  isLoadingGetWallets: false,
+  wallets: []
 };
 
 export const LoanOriginationContext = React.createContext<ILoanContext>(loanContextDefaultValue);
+
+const loanService = LoanService.instance();
+
 export const useLoanOriginationContextValue = (): ILoanContext => {
   const [_isNewCustomer, setNewCustomer] = useState<boolean>(false);
   const [_isAdvanceCashApplied, setAdvanceCashApplied] = useState<boolean>(false);
@@ -22,6 +29,9 @@ export const useLoanOriginationContextValue = (): ILoanContext => {
   const [_personalFinanceLoanData, setPersonalFinanceLoanData] = useState<loanDataType | null>(
     null
   );
+  const [_isLoadingGetWallets, setIsLoadingGetWallets] = useState<boolean>(false);
+  const [_errorGetWallets, setErrorGetWallets] = useState<Error>();
+  const [_wallets, setWallets] = useState<Wallets[]>([]);
 
   useEffect(() => {
     checkUserStatus();
@@ -64,6 +74,20 @@ export const useLoanOriginationContextValue = (): ILoanContext => {
     }
   }, []);
 
+  
+  const getWallets = useCallback(async () => {
+    setIsLoadingGetWallets(true);
+    try {
+      const response = await loanService.getWallets();
+      setWallets(response.data);
+      console.log('response', response);
+    } catch (e: any) {
+      setErrorGetWallets(e?.response?.data?.errors[0] as Error);
+    } finally {
+      setIsLoadingGetWallets(false);
+    }
+  }, []);
+
   return useMemo(
     () => ({
       isNewFinanceCustomer: _isNewCustomer,
@@ -74,6 +98,10 @@ export const useLoanOriginationContextValue = (): ILoanContext => {
       advanceCashLoanData: _advanceCashLoanData,
       personalFinanceLoanData: _personalFinanceLoanData,
       clearLoanData,
+      getWallets,
+      isLoadingGetWallets: _isLoadingGetWallets,
+      errorGetWallets: _errorGetWallets,
+      wallets: _wallets
     }),
     [
       _isNewCustomer,
@@ -81,6 +109,9 @@ export const useLoanOriginationContextValue = (): ILoanContext => {
       _isPersonalLoanApplied,
       _personalFinanceLoanData,
       _advanceCashLoanData,
+      _isLoadingGetWallets,
+      _errorGetWallets,
+      _wallets
     ]
   );
 };
