@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { Keyboard, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Keyboard, SafeAreaView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { ThemeContext } from 'react-native-theme-component';
 import { colors } from '../assets';
 import { fonts } from '../assets/fonts';
-import AlertMessage from '../components/common/alert-message';
 import RangeSlider from '../components/common/range-slider';
 import Button from '../components/core/button';
 import { withHeightPercent } from '../helpers/screen-utils';
 import { string } from './constants';
+import { useNavigation } from '@react-navigation/native';
+import RightArrowIcon from './icons/RightArrowIcon';
 
 const MIN = 1;
 
@@ -33,22 +34,21 @@ const SelectAmountComponent: React.FC<ISelectAmountComp> = (props: ISelectAmount
   } = props;
   const { i18n } = useContext(ThemeContext);
   const [rangeAmount, setRangeAmount] = useState(600);
-  const [duration, setDuration] = useState(1);
+  const [duration, setDuration] = useState(3);
+  const navigation = useNavigation<any>();
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <View style={styles.arrowContainer}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <RightArrowIcon style={{ transform: [{ rotate: '180deg' }] }} />
+        </TouchableOpacity>
+      </View>
       <View style={styles.container}>
-        <Text style={styles.title}>{title}</Text>
-        {showInfo && (
-          <AlertMessage
-            isInfo
-            text={
-              i18n?.t('loan-origination-component.lbl_amount_elg', {
-                credit: creditLimit.toFixed(2),
-              }) ?? `You're eligible to apply for RM ${creditLimit.toFixed(2)}`
-            }
-          />
-        )}
+        <Text style={styles.title}>Financing amount and duration</Text>
+        <Text style={styles.subTitle}>
+          How much and how long would you like the tenure of your financing?
+        </Text>
         <View
           style={[
             styles.dataContainer,
@@ -63,38 +63,63 @@ const SelectAmountComponent: React.FC<ISelectAmountComp> = (props: ISelectAmount
               <Text style={styles.amountText}>RM {rangeAmount.toFixed(2)}</Text>
             </View>
           )}
-          {showDuration && (
-            <View style={[styles.centeredContainer, { marginTop: !showAmount ? 30 : 0 }]}>
-              <Text style={styles.amountApplyText}>
-                {i18n?.t('loan-origination-component.lbl_ten_duration') ?? 'Tenure duration'}
-              </Text>
-              <Text style={styles.amountText}>{duration} month</Text>
-            </View>
-          )}
         </View>
 
-        <RangeSlider
-          style={styles.amountSlider}
-          min={MIN}
-          max={creditLimit}
-          initLow={1}
-          step={showAmount ? 50 : 1}
-          disableRange
-          onValueChanged={(low: number, _: number, fromUser: boolean) => {
-            if (fromUser) {
-              Keyboard.dismiss();
-              if (showAmount) {
-                setRangeAmount(low);
-              } else {
-                setDuration(low);
+        <View style={{ marginTop: -15 }}>
+          <RangeSlider
+            style={styles.amountSlider}
+            min={MIN}
+            max={creditLimit}
+            initLow={1}
+            step={showAmount ? 50 : 1}
+            disableRange
+            onValueChanged={(low: number, _: number, fromUser: boolean) => {
+              if (fromUser) {
+                Keyboard.dismiss();
+                if (showAmount) {
+                  setRangeAmount(low);
+                } else {
+                  setDuration(low);
+                }
               }
-            }
-          }}
-          onTouch={() => {}}
-          title={rangeLabel}
-          minLabel={!showAmount ? `${MIN} month` : `RM ${MIN.toFixed(2)}`}
-          maxLabel={!showAmount ? `${creditLimit} month` : `RM ${creditLimit.toFixed(2)}`}
-        />
+            }}
+            onTouch={() => {}}
+            title={''}
+            minLabel={!showAmount ? `${MIN} month` : `RM ${MIN.toFixed(2)}`}
+            maxLabel={!showAmount ? `${creditLimit} month` : `RM ${creditLimit.toFixed(2)}`}
+          />
+        </View>
+        <View style={styles.seperator}></View>
+        <View style={[styles.dataContainer, { justifyContent: 'center' }]}>
+          <View style={[styles.centeredContainer, { marginTop: !showDuration ? 30 : 0 }]}>
+            <Text style={styles.amountApplyText}>
+              {i18n?.t('loan-origination-component.lbl_amt_apply') ?? 'Duration'}
+            </Text>
+            <Text style={styles.amountText}>{duration} Months</Text>
+          </View>
+        </View>
+        <View style={styles.selectDurationContainer}>
+          {['3', '6', '12'].map((item, index) => {
+            return (
+              <TouchableOpacity
+                onPress={() => setDuration(parseInt(item))}
+                style={styles.durationButton}
+                key={index}
+              >
+                <View
+                  style={[
+                    styles.button,
+                    { backgroundColor: duration === parseInt(item) ? 'black' : '#F5F5F5' },
+                  ]}
+                >
+                  <Text style={{ color: duration === parseInt(item) ? 'white' : 'black' }}>
+                    {item} months
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
       </View>
       <View style={styles.lowerContainer}>
         <Button
@@ -123,14 +148,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     color: colors.secondary,
-    marginBottom: 14,
     marginRight: 30,
   },
   subTitle: {
-    fontSize: 14,
     color: colors.secondary,
-    marginBottom: 20,
-    width: '80%',
+    fontSize: 14,
+    marginTop: 8,
   },
   lowerContainer: {
     paddingHorizontal: 24,
@@ -178,10 +201,32 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   dataContainer: {
-    flex: 1,
     backgroundColor: colors.white,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginBottom: 15,
+  },
+  seperator: {
+    height: 0.5,
+    backgroundColor: colors.primary,
+    marginVertical: 10,
+  },
+  arrowContainer: {
+    paddingHorizontal: 24,
+    paddingTop: 10,
+  },
+  selectDurationContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  durationButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 44,
   },
 });

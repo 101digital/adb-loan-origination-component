@@ -1,9 +1,10 @@
 import React, { useContext, useMemo } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { ThemeContext } from 'react-native-theme-component';
-import OptionsButton from './components/common/options-button';
+import RightArrowIcon from './components/icons/RightArrowIcon';
 import { LoanOriginationContext } from './contexts';
-import { sortnull } from './helpers/sort-null';
+import CircularImageView from './components/core/circular-image-view';
+
 import { styles } from './styles';
 export interface ILoanComponent {
   onCashAdvancePress: () => void;
@@ -12,66 +13,70 @@ export interface ILoanComponent {
   onRevCreditPress: () => void;
 }
 const LoanComponent: React.FC<ILoanComponent> = (props: ILoanComponent) => {
-  const { onRevCreditPress, onGroceryPayPress, onFinancePress, onCashAdvancePress } = props;
-  const {
-    isAdvanceCashApplied,
-    isPersonalLoanApplied,
-    advanceCashLoanData,
-    personalFinanceLoanData,
-  } = useContext(LoanOriginationContext);
+  const {} = props;
+
   const { i18n } = useContext(ThemeContext);
-  const options = useMemo(
-    () => [
-      {
-        id: '1',
-        title: 'Cash Advance-i',
-        onPress: onCashAdvancePress,
-        isDataAvailable: isAdvanceCashApplied,
-        data: advanceCashLoanData,
-      },
-      {
-        id: '2',
-        title: 'Personal Financing-i',
-        onPress: onFinancePress,
-        isDataAvailable: isPersonalLoanApplied,
-        data: personalFinanceLoanData,
-      },
-      { id: '3', title: 'Grocery Pay Less-i', onPress: onGroceryPayPress, data: null },
-      { id: '4', title: 'Revolving Credit', onPress: onRevCreditPress, data: null },
-    ],
-    [onRevCreditPress, onGroceryPayPress, onFinancePress, onCashAdvancePress]
-  );
+
   return (
     <View style={styles.container}>
-      <FlatList
-        data={sortnull(options)}
-        keyExtractor={(item) => item.id}
-        bounces={false}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => {
-          return (
-            <View style={{ paddingHorizontal: 24 }}>
-              <OptionsButton
-                title={item.title}
-                onClick={item.onPress}
-                isDataAvailable={item.isDataAvailable}
-                data={item.data}
-              />
+      <View style={styles.navContainer}>
+        <Text style={styles.navHeaderText}>Financing Center</Text>
+      </View>
+      <View style={styles.menuContainer}>
+        <TouchableOpacity>
+          <View style={styles.menuRow}>
+            <View>
+              <Text style={styles.title}>Cash Advance-i</Text>
+              <Text style={styles.subTitle}>Account No: 1234 5678 7000 8000</Text>
             </View>
-          );
-        }}
-        ListHeaderComponent={
-          <View style={styles.navContainer}>
-            <Text style={styles.navHeaderText}>Finance</Text>
-            <View style={styles.totalLimitContainer}>
-              <Text style={styles.totalLimitTitleText}>
-                {i18n?.t('loan-origination-component.lbl_ttl_lmt') ?? 'Total limit'}
-              </Text>
-              <Text style={styles.totalLimitText}>RM 0.00</Text>
-            </View>
+            <RightArrowIcon />
           </View>
-        }
-      />
+        </TouchableOpacity>
+
+        <View style={{ marginTop: 15 }}>
+          <Text style={styles.totalAmount}>Total Amount</Text>
+          <Text style={styles.totalPrice}>RM 990.00</Text>
+        </View>
+
+        <View style={styles.seperator}></View>
+        <View
+          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+        >
+          <Text style={styles.totalAmount}>Due Date</Text>
+          <Text style={styles.totalPrice}>09 Jan 2023</Text>
+        </View>
+
+        <View
+          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+        >
+          <Text style={styles.totalAmount}>Department Amount</Text>
+          <Text style={styles.totalPrice}>RM 85.00</Text>
+        </View>
+      </View>
+
+      <View style={{ marginTop: 20 }}>
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.slider}
+        >
+          {[0, 1, 2].map((item, index) => {
+            return (
+              <TouchableOpacity style={styles.sliderContainer}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <CircularImageView />
+                  <View style={{ marginLeft: 10 }}>
+                    <Text>Personal Financing</Text>
+                    <Text numberOfLines={2} style={styles.sliderLabel}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+      </View>
     </View>
   );
 };
