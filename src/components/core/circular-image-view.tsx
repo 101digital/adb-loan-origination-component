@@ -1,18 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ImageIcon from '../../components/icons/ImageIcon';
 
 export interface ICircularImageView {
   label?: string;
+  onSelect?: () => void;
 }
 const CircularImageView: React.FC<ICircularImageView> = (props: ICircularImageView) => {
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+    <TouchableOpacity onPress={props.onSelect} style={{ justifyContent: 'center', alignItems: 'center' }}>
       <View style={styles.container}>
         <ImageIcon />
       </View>
       {props.label && <Text style={{ marginTop: 5 }}>{props.label ?? ''}</Text>}
-    </View>
+    </TouchableOpacity>
   );
 };
 

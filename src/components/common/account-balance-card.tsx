@@ -1,18 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors, palette } from '../../assets';
 
 export interface IAccountBalanceProps {
   balance: number;
+  currencyCode: string;
+  isLoading: boolean;
+  onSelectAccountBalance: () => void;
 }
 
 const AccountBalanceCard: React.FC<IAccountBalanceProps> = (props: IAccountBalanceProps) => {
-  const { balance = 0 } = props;
+  const { balance = 0, isLoading, onSelectAccountBalance, currencyCode } = props;
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onSelectAccountBalance} style={styles.container}>
       <Text style={styles.accountBalanceText}>Account Balance</Text>
-      <Text style={styles.accountBalance}>RM {balance.toFixed(2)}</Text>
-    </View>
+      {isLoading ? <ActivityIndicator style={styles.loadingSpinner} /> : <Text style={styles.accountBalance}>{currencyCode} {balance.toFixed(2)}</Text>}
+    </TouchableOpacity>
   );
 };
 
@@ -35,4 +38,7 @@ const styles = StyleSheet.create({
     ...palette.bigTitle,
     padding: 8,
   },
+  loadingSpinner: {
+    marginTop: 10,
+  }
 });

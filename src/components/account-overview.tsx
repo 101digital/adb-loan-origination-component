@@ -1,23 +1,64 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ThemeContext } from 'react-native-theme-component';
+import { AuthContext } from 'react-native-auth-component';
 import { colors } from '../assets';
 import { fonts } from '../assets/fonts';
-import AccountBalanceCard from '../components/common/account-balance-card';
-import FunctionalityList from '../components/common/functionality-list';
-import ListCard from '../components/common/list-card';
-import CircularImageView from '../components/core/circular-image-view';
-import BarcodeIcon from '../components/icons/BarcodeIcon';
+import AccountBalanceCard from './common/account-balance-card';
+import FunctionalityList from './common/functionality-list';
+import ListCard from './common/list-card';
+import CircularImageView from './core/circular-image-view';
+import BarcodeIcon from './icons/BarcodeIcon';
+import { LoanOriginationContext } from '../contexts';
+import Carousel from "react-native-snap-carousel";
 
-const AccountDetail = () => {
-  const [username] = useState('Aeolanda!');
+type AccountDetailProps = {
+  onNavigateToSetting: () => void;
+  onSelectAccount: (accountId: string) => void;
+  onSelectAccountBalance: () => void;
+  onSelectTransfer: () => void;
+  onSelectGoals: () => void;
+  onSelectReward: () => void;
+  onSelectMore: () => void;
+}
+
+
+const AccountDetail = (props: AccountDetailProps) => {
+  const { onNavigateToSetting, onSelectAccount, onSelectAccountBalance, onSelectTransfer, onSelectGoals,onSelectReward, onSelectMore  } = props;
+  const { profile } = useContext(AuthContext);
   const { i18n } = useContext(ThemeContext);
+  const fullName = `${profile?.firstName} ${profile?.lastName}`.trim();
+  const { wallets, getWallets, isLoadingGetWallets } = useContext(LoanOriginationContext);
+  const currentBalance = wallets.length > 0 ? wallets[0].currentBalance : 0;
+  const currencyCode = wallets.length > 0 ? wallets[0].currencyCode : '';
+
+  const listAccounts = [
+    {
+      id: '01',
+      title: 'Cash Advance-i',
+      subTitle: 'Get up to RM 1,000 anytime!',
+      onSelect: () => onSelectAccount('01')
+    },
+    {
+      id: '02',
+      title: 'Cash Advance-i',
+      subTitle: 'Get up to RM 1,000 anytime!',
+      onSelect: () => onSelectAccount('02')
+    }
+  ]
+  
+  useEffect(() => {
+    getWallets();
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.profileNameContainer}>
-          <Text style={styles.usernameText}>Hi, {username}</Text>
-          <CircularImageView />
+          <Text style={styles.usernameText}>{`${i18n?.t('loan-origination-component.lbl_hi')}, ${fullName}`}</Text>
+          <TouchableOpacity onPress={onNavigateToSetting}>
+            <CircularImageView />
+          </TouchableOpacity>
         </View>
         <View style={styles.membershipContainer}>
           <View style={{ marginBottom: 24 }}>
@@ -38,9 +79,9 @@ const AccountDetail = () => {
             <Text style={styles.value}>1,000 pts</Text>
           </View>
         </View>
-        <AccountBalanceCard balance={630} />
-        <ListCard />
-        <FunctionalityList />
+        <AccountBalanceCard currencyCode={currencyCode} balance={currentBalance} isLoading={isLoadingGetWallets} onSelectAccountBalance={onSelectAccountBalance} />
+        <ListCard onSelectTransfer={onSelectTransfer} onSelectGoals={onSelectGoals} onSelectRewards={onSelectReward} onSelectMore={onSelectMore} />
+        <FunctionalityList listAccount={listAccounts} />
       </View>
     </SafeAreaView>
   );
